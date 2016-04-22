@@ -23,6 +23,9 @@
   (package-install 'cider))
 
 
+(unless (package-installed-p 'align-cljlet)
+  (package-install 'align-cljlet))
+
 (unless (package-installed-p 'paredit)
   (package-install 'paredit))
 
@@ -65,6 +68,7 @@
 			       (cider-mode +1)
 			       (paredit-mode +1)
 			       (rainbow-delimiters-mode +1)
+                               (require 'align-cljlet)
 			       ;; (auto-complete-mode +1)
                                ))
 
@@ -87,6 +91,9 @@
 (eval-after-load 'clojure-mode
   '(define-key clojure-mode-map (kbd "C-c C-z") 'psc-switch-to-repl-buffer))
 
+
+(eval-after-load 'clojure-mode
+  '(define-key clojure-mode-map (kbd "C-c C-a") 'align-cljlet))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -121,3 +128,4 @@
  )
 
 (setq-default indent-tabs-mode nil)
+(setq tramp-default-method "ssh")
