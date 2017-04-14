@@ -8,11 +8,31 @@
    'package-archives
    '("melpa-stable" . "https://stable.melpa.org/packages/")
    t)
+  (add-to-list
+   'package-archives
+   '("marmalade" . "https://marmalade-repo.org/packages/"))
   (package-initialize))
 
 
-(require 'ido)
-(ido-mode t)
+(defun edit-init
+    ()
+  (interactive)
+  (find-file "~/.emacs"))
+
+(global-set-key (kbd "C-c i") 'edit-init)
+
+(global-set-key (kbd "M-x") 'smex)
+
+(global-set-key (kbd "C-c y") 'bury-buffer)
+
+(global-set-key (kbd "C-c k") 'kill-whole-line)
+
+(require 'dired-x)
+
+(global-set-key (kbd "C-x j") 'dired-jump)
+(global-set-key (kbd "C-x C-j") 'dired-jump)
+
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
 (add-to-list 'package-pinned-packages '(paredit . "melpa-stable") t)
@@ -44,6 +64,8 @@
 (global-company-mode)
 ;; (add-hook 'cider-repl-mode-hook #'company-mode)
 ;; (add-hook 'cider-mode-hook #'company-mode)
+
+(add-hook 'prog-mode-hook 'fixme-mode)
 
 (require 'yasnippet)
 (yas-global-mode 1)
@@ -119,7 +141,15 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" default))))
+    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" default)))
+ '(delete-active-region t)
+ '(delete-selection-mode t)
+ '(flx-ido-mode t)
+ '(ido-enable-flex-matching t)
+ '(ido-mode (quote both) nil (ido))
+ '(ido-ubiquitous-mode t)
+ '(ido-vertical-mode t)
+ '(winner-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
